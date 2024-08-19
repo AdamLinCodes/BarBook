@@ -6,15 +6,27 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
+interface CollapsibleProps extends PropsWithChildren {
+  title: string;
+  onPress?: () => void; // Optional onPress prop
+}
+
+export function Collapsible({ children, title, onPress }: CollapsibleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useColorScheme() ?? 'light';
+
+  const handlePress = () => {
+    setIsOpen((prev) => !prev);
+    if (!isOpen && onPress) {
+      onPress(); // Trigger the onPress function when the section is opened
+    }
+  };
 
   return (
     <ThemedView>
       <TouchableOpacity
         style={styles.heading}
-        onPress={() => setIsOpen((value) => !value)}
+        onPress={handlePress}
         activeOpacity={0.8}>
         <Ionicons
           name={isOpen ? 'chevron-down' : 'chevron-forward-outline'}

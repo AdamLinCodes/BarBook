@@ -1,7 +1,8 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+import AlcoholSelector from '@/components/AlcoholSelector';
 
-export default function TabTwoScreen() {
+export default function TabFourScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -11,6 +12,8 @@ export default function TabTwoScreen() {
           style={styles.barshelfLogo}
         />
       }>
+
+      <AlcoholSelector/>
 
     </ParallaxScrollView>
   );
