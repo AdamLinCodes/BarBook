@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Card } from 'react-native-elements';
 import { DrinkType } from '@/constants/Types';
 
 interface DrinkCardProps {
