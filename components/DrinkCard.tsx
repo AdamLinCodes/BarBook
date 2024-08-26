@@ -15,8 +15,8 @@ export function DrinkCard({ drink }: DrinkCardProps) {
     
     return (
         <View style={styles.cardContainer}>
-            <Card.Title>{drink.strDrink}</Card.Title>
-            <Card.Divider />
+            <Text style={styles.title}>{drink.strDrink}</Text>
+            <View style={styles.divider} />
             <Image source={{ uri: drink.strDrinkThumb }} style={styles.image} />
             <Text style={styles.glass}>Glass: {drink.strGlass}</Text>
             <Text style={styles.ingredientsTitle}>Ingredients:</Text>
@@ -53,5 +53,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    divider: {
+        width: '100%',
+        height: 1,
+        backgroundColor: '#ddd',
+        marginVertical: 10,
     },
 });
