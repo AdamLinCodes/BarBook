@@ -4,6 +4,7 @@ import { DrinkCard } from '@/components/DrinkCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DrinkType } from '@/constants/Types';
+import { ThemedText } from '@/components/ThemedText';
 
 export default function TabThreeScreen() {
 
@@ -37,6 +38,8 @@ export default function TabThreeScreen() {
           style={styles.barshelfLogo}
         />
       }>
+      
+      <ThemedText type='title'>Todays Drink of the day is...</ThemedText>
 
       <DrinkCard drink={drink}/>
 
