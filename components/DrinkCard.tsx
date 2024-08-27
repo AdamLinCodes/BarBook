@@ -18,7 +18,10 @@ export function DrinkCard({ drink }: DrinkCardProps) {
             <View style={styles.divider} />
             <Image source={{ uri: drink.strDrinkThumb }} style={styles.image} />
             <Text style={styles.glass}>Served in a {drink.strGlass}</Text>
-            <Text style={styles.instructions}>"{drink.strInstructions}"</Text>
+            <Text style={styles.instructions}>
+                <Text style={{ fontWeight: 'bold' }}>NB. </Text>
+                {drink.strInstructions}
+            </Text>
             <Text style={styles.ingredientsTitle}>Ingredients:</Text>
             {ingredients.map((item, index) => (
                 <Text key={index}> {index + 1}) {item.measure} {item.ingredient}</Text>
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#FFE1BB',
         borderRadius: 20, // Adjust this value for more or less rounded corners
     },
     loadingContainer: {
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
         height: 200,
     },
     instructions: {
+        marginHorizontal: 10,
         marginVertical: 10,
         fontSize: 16,
     },
