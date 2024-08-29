@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { PropsWithChildren, useState } from 'react';
-import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { StyleSheet, TouchableOpacity, useColorScheme, ViewStyle } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -9,9 +9,10 @@ import { Colors } from '@/constants/Colors';
 interface CollapsibleProps extends PropsWithChildren {
   title: string;
   onPress?: () => void; // Optional onPress prop
+  style?: ViewStyle; // Optional style prop
 }
 
-export function Collapsible({ children, title, onPress }: CollapsibleProps) {
+export function Collapsible({ children, title, onPress, style}: CollapsibleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useColorScheme() ?? 'light';
 
@@ -23,7 +24,7 @@ export function Collapsible({ children, title, onPress }: CollapsibleProps) {
   };
 
   return (
-    <ThemedView>
+    <ThemedView style={style}>
       <TouchableOpacity
         style={styles.heading}
         onPress={handlePress}

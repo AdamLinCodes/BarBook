@@ -35,7 +35,7 @@ export default function AlcoholSelector() {
       });
   };
 
-  const fetchDrinkDetails = (drinkId: string, alcohol: string) => {
+  const fetchDrinkDetails = (drinkId: string) => {
     if (selectedDrink[drinkId]) return; // If drink details are already loaded, do nothing
 
     axios
@@ -54,18 +54,21 @@ export default function AlcoholSelector() {
 
   return (
     <ThemedView style={styles.container}>
+      <ThemedText type="title" style={styles.title}>Pick your poison 🍸</ThemedText>
       <ScrollView style={styles.alcoholContainer}>
         {alcoholTypes.map((alcohol) => (
           <Collapsible
             key={alcohol.name}
             title={alcohol.name}
             onPress={() => fetchDrinks(alcohol.name)} // Pass the fetch function
+            style={styles.alcoholName}
           >
             {drinks[alcohol.name]?.map((drink) => (
               <Collapsible
                 key={drink.idDrink}
                 title={drink.strDrink}
-                onPress={() => fetchDrinkDetails(drink.idDrink, alcohol.name)}
+                onPress={() => fetchDrinkDetails(drink.idDrink)}
+                style={styles.drink}
               >
                 {selectedDrink[drink.idDrink] ? (
                   <DrinkCard drink={selectedDrink[drink.idDrink]!} />
@@ -96,4 +99,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
   },
+  alcoholName: {
+    backgroundColor: '#46493F', // Button background color
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  drink: {
+    backgroundColor: '#46493F', // Button background color
+  },
+  title: {
+    marginBottom: 15,
+  }
 });
