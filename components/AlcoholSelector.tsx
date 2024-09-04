@@ -54,7 +54,6 @@ export default function AlcoholSelector() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>Pick your poison 🍸</ThemedText>
       <ScrollView style={styles.alcoholContainer}>
         {alcoholTypes.map((alcohol) => (
           <Collapsible
@@ -108,7 +107,4 @@ const styles = StyleSheet.create({
   drink: {
     backgroundColor: '#46493F', // Button background color
   },
-  title: {
-    marginBottom: 15,
-  }
 });
