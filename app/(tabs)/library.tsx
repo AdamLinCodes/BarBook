@@ -6,22 +6,6 @@ import { ThemedText } from '@/components/ThemedText';
 
 export default function TabFourScreen() {
 
-  async function handleSearch(query: string): Promise<void> {
-    try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`);
-      const data = await response.json();
-
-      if (data.drinks) {
-        console.log('Search results:', data.drinks);
-      } else {
-        Alert.alert('No results found');
-      }
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      Alert.alert('An error occurred while searching. Please try again.');
-    }
-  }
-
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -32,11 +16,9 @@ export default function TabFourScreen() {
         />
       }>
 
-      <ThemedText type="title">Pick your poison 🍸</ThemedText>
-
-      <SearchBar placeholder="Search items..." onSearch={handleSearch} />
-
-      <AlcoholSelector/>
+      <ThemedText type="title">Saved Drinks 🍸</ThemedText>
+      <ThemedText type="subtitle">This page, we need to figure out how to store the drink data locally on the device. It shouldn't be fetching everytime.</ThemedText>
+      {/* <AlcoholSelector/> */}
 
     </ParallaxScrollView>
   );
