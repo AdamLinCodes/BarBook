@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface SearchBarProps {
@@ -10,23 +10,9 @@ interface SearchBarProps {
 const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
   const [searchText, setSearchText] = useState('');
 
-  const handleSearch = async (text: string) => {
+  const handleSearch = (text: string) => {
     setSearchText(text);
-
-    try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`);
-      const data = await response.json();
-
-      if (data.drinks) {
-        // Handle the response data here
-        console.log('Search results:', data.drinks);
-      } else {
-        Alert.alert('No results found');
-      }
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      Alert.alert('An error occurred while searching. Please try again.');
-    }
+    onSearch(text);  // Pass the input back to the parent
   };
 
   return (
@@ -42,7 +28,6 @@ const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -51,6 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    marginVertical: 20,
   },
   icon: {
     marginRight: 10,
