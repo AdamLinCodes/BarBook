@@ -1,13 +1,14 @@
-import { StyleSheet, Image, Alert, View, Text, ActivityIndicator, FlatList } from 'react-native';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { StyleSheet, Image, Alert, View, Text, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import SearchBar from '@/components/SearchBar';
 import { useState } from 'react';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabTwoScreen() {
   const [drinks, setDrinks] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [bookmarked, setBookmarked] = useState<{ [key: string]: boolean }>({});
 
   async function handleSearch(query: string): Promise<void> {
     setLoading(true);  // Set loading to true when search starts
@@ -29,18 +30,39 @@ export default function TabTwoScreen() {
     }
   }
 
+  const toggleBookmark = (idDrink: string) => {
+    setBookmarked((prevBookmarks) => ({
+      ...prevBookmarks,
+      [idDrink]: !prevBookmarks[idDrink],
+    }));
+  };
+
   const renderItem = ({ item }: { item: any }) => (
     <View style={styles.card}>
       <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
-      <Text style={styles.drinkName}>{item.strDrink}</Text>
-      <Text>{item.strCategory}</Text>
-      <Text>{item.strInstructions}</Text>
+
+      <View style={styles.cardInfo}>
+        <Text style={styles.drinkName}>{item.strDrink}</Text>
+        <Text>{item.strCategory}</Text>
+
+      </View>
+
+      <TouchableOpacity
+        style={styles.bookmark}
+        onPress={() => toggleBookmark(item.idDrink)}
+      >
+        <Ionicons
+          name={bookmarked[item.idDrink] ? 'bookmark' : 'bookmark-outline'}
+          size={24}
+          color={bookmarked[item.idDrink] ? 'gold' : 'gray'}
+        />
+      </TouchableOpacity>
     </View>
   );
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>Saved Drinks 🍸</ThemedText>
+      <ThemedText type="title" style={styles.title}>Search Our Database 🍸</ThemedText>
       <SearchBar placeholder="Search items..." onSearch={handleSearch} />
 
       {loading ? (
@@ -66,6 +88,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   card: {
+    flexDirection: 'row', // Align the image and text horizontally
     margin: 10,
     padding: 10,
     backgroundColor: '#fff',
@@ -76,9 +99,16 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 2,
   },
+  cardInfo :{
+    marginHorizontal: 10,
+  },
+  bookmark: {
+    marginLeft: 'auto',
+    marginVertical: 'auto',
+  },
   image: {
-    width: '100%',
-    height: 200,
+    width: '20%',
+    height: 75,
     borderRadius: 5,
   },
   drinkName: {
