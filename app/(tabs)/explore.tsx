@@ -13,14 +13,21 @@ export default function TabTwoScreen() {
   async function handleSearch(query: string): Promise<void> {
     setLoading(true);  // Set loading to true when search starts
     try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`);
-      const data = await response.json();
+      if (query == "") {
+        console.log("NO FETCHING!!!");
+        setDrinks([]);
+      }
 
-      if (data.drinks) {
-        setDrinks(data.drinks);  // Populate the drinks state
-      } else {
-        Alert.alert('No results found');
-        setDrinks([]);  // Empty the drinks state if no results
+      else {
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`);
+        const data = await response.json();
+
+        if (data.drinks) {
+          setDrinks(data.drinks);  // Populate the drinks state
+        } else {
+          Alert.alert('No results found');
+          setDrinks([]);  // Empty the drinks state if no results
+        }
       }
     } catch (error) {
       console.error('Error fetching search results:', error);
