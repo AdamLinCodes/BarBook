@@ -1,8 +1,7 @@
 import { StyleSheet, Image, View, Alert } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import AlcoholSelector from '@/components/AlcoholSelector';
-import SearchBar from '@/components/SearchBar';
 import { ThemedText } from '@/components/ThemedText';
+import SavedDrinkList from '@/components/SavedDrinkList';
 
 export default function TabFourScreen() {
 
@@ -20,6 +19,7 @@ export default function TabFourScreen() {
       <ThemedText type="subtitle">This page, we need to figure out how to store the drink data locally on the device. It shouldn't be fetching everytime.</ThemedText>
       {/* <AlcoholSelector/> */}
 
+      <SavedDrinkList></SavedDrinkList>
     </ParallaxScrollView>
   );
 }
