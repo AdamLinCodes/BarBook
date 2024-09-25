@@ -1,6 +1,6 @@
 import { StyleSheet, Image, Platform, View, Text } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { DrinkCard } from '@/components/DrinkCard';
+import { DrinkCardFull } from '@/components/DrinkCardFull';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DrinkType } from '@/constants/Types';
@@ -41,7 +41,7 @@ export default function TabThreeScreen() {
       
       <ThemedText type='title'>Todays Drink of the day is...</ThemedText>
 
-      <DrinkCard drink={drink}/>
+      <DrinkCardFull drink={drink}/>
 
     </ParallaxScrollView>
   );
